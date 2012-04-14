@@ -199,7 +199,10 @@ static NSData *kTrue = NULL;
 - (NSData *)serializeString:(NSString *)inString error:(NSError **)outError
     {
     #pragma unused (outError)
-
+        // convert non string to string
+        if (![inString isKindOfClass:[NSString class]]){
+            inString = [inString description];
+        }
     const char *theUTF8String = [inString UTF8String];
 
     NSMutableData *theData = [NSMutableData dataWithLength:strlen(theUTF8String) * 2 + 2];
